@@ -1,0 +1,24 @@
+<div class="menu-container">
+    <!-- Card del menú -->
+    <p-card header="Menú" class="sidebar-menu">
+        <p-panelmenu [model]="items" [style]="{'width':'100%'}" [multiple]="true"/>
+    </p-card>
+
+    <!-- Botón de nuevo chat -->
+    <div class="button-container">
+        <p-button icon="pi pi-plus" label="Nuevo Chat" (click)="newChat()"/>
+    </div>
+
+    <!-- Card del historial de chats -->
+    <p-card header="Historial de Chats" class="sidebar-menu chat-container">
+        <div class="chat-history">
+            @for (chat of chats; track chat.id) {
+                <div class="chat-item" (click)="openChat(chat.id)">
+                    <i class="pi pi-comments"></i>
+                    <span>{{ chat.label }}</span>
+                </div>
+            }
+        </div>
+    </p-card>
+</div>
+

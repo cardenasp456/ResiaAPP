@@ -1,0 +1,38 @@
+/* Contenedor principal */
+.response-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+}
+
+p {
+    color: white;
+}
+
+/* Caja de respuesta */
+.response-box {
+    background-color: #2d2d2d0a;
+    color: white;
+    padding: 15px;
+    border-radius: 12px;
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: left;
+    font-size: 16px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    white-space: pre-line; /* Mantiene los saltos de línea */
+}
+
+/* Efecto de cursor parpadeante */
+.response-box p::after {
+    content: "|";
+    display: inline-block;
+    margin-left: 2px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}

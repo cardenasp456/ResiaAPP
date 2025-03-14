@@ -1,0 +1,22 @@
+.main {
+    .app-container{
+        display: flex;
+        flex-direction: row; // Asegúrate de que los elementos hijos se alineen en una fila
+
+        .app-menu {
+            width: 20% !important;
+        }
+
+        .app-chat {
+            flex-grow: 1; // Esto hará que el chat ocupe el espacio restante
+        }
+    }
+
+    .title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%; // Asegúrate de que el contenedor tenga una altura definida
+        text-align: center;
+    }
+}

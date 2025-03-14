@@ -1,0 +1,8 @@
+// filepath: c:\Respos\resia_app\resia_app\src\app\components\chat\chat.component.scss
+.chat-container {
+    display: flex;
+    flex-direction: column; // Alinea los elementos en columna
+    justify-content: center; // Centra los elementos verticalmente
+    align-items: center; // Centra los elementos horizontalmente
+    height: 100vh; // Asegúrate de que el contenedor ocupe toda la altura de la vista
+}

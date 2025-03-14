@@ -1,0 +1,136 @@
+// For information on how to create your own theme, please see:
+// http://ionicframework.com/docs/theming/
+// Ionic Variables and Theming. For more info, please see:
+// http://ionicframework.com/docs/theming/
+
+// @import "primeng/resources/themes/lara-light-purple/theme.css";
+// @import "primeng/resources/primeng.css";
+
+
+/** Ionic CSS Variables **/
+:root {
+    /** primary **/
+    --ion-color-primary: #425CC7;
+    --ion-color-primary-rgb: 125, 1, 130;
+    --ion-color-primary-contrast: #ffffff;
+    --ion-color-primary-contrast-rgb: 255, 255, 255;
+    --ion-color-primary-shade: #22004C;
+    --ion-color-primary-tint: #F8F0FF;
+    --ion-color-primary-hover: #B78AE0;
+
+    --ion-color-item-selected: #EDE2F7;
+    --ion-color-placeholder: #EBE6E4;
+
+    /** secondary **/
+    --ion-color-secondary: #6AAAE4;
+    --ion-color-secondary-rgb: 102, 2, 106;
+
+
+    /** tertiary **/
+    --ion-color-tertiary: #C8D6EB;
+    --ion-color-tertiary-light: #E4E4E4;
+    --ion-color-tertiary-rgb: 82, 96, 255;
+
+
+    /** quaternary **/
+    --ion-color-quaternary: #F4F2F6;
+    --ion-color-quaternary-rgb: 45, 211, 111;
+
+
+    /** warning **/
+    --ion-color-warning: #CAAE7A;
+    --ion-color-warning-rgb: 255, 196, 9;
+
+
+    /** danger **/
+    --ion-color-danger: #EA0249;
+    --ion-color-danger-rgb: 235, 68, 90;
+    --ion-color-danger-contrast: #ffffff;
+    --ion-color-danger-contrast-rgb: 255, 255, 255;
+    --ion-color-danger-shade: #cf3c4f;
+    --ion-color-danger-tint: #ed576b;
+
+
+    /** dark **/
+    --ion-color-dark: #000000;
+    --ion-color-dark-rgb: 34, 36, 40;
+    --ion-color-dark-contrast: #ffffff;
+    --ion-color-dark-contrast-rgb: 255, 255, 255;
+    --ion-color-dark-shade: #1e2023;
+    --ion-color-dark-tint: #383a3e;
+
+    --ion-color-light: #F4F4F4;
+
+    --ion-color-gray: #CFD1D2;
+
+    // /** purple **/
+    --ion-color-purple: #510C76;
+    --ion-color-purple-rgb: 244, 245, 248;
+
+    /** blue **/
+    --ion-color-blue: #525CA3;
+    --ion-color-blue-rgb: 125, 1, 130;
+
+    /** king-blue **/
+    --ion-color-king-blue: #BCBC1C;
+    --ion-color-king-blue-rgb: 125, 1, 130;
+
+    /** coral **/
+    --ion-color-coral: #CF483E;
+    --ion-color-coral-rgb: 125, 1, 130;
+
+
+    //--ion-color-secondary-blue: #525CA3;
+    //--ion-color-secondary-king-blue: #BCBC1C;
+    //--ion-color-seconday-pink: #BE046B;
+    //--ion-color-secondary-coral: #CF483E;
+    //--ion-color-secondary-lavender: #886AA3;
+    //--ion-color-secondary-ochre: #CAAE7A;
+    //--ion-color-secondary-purple: #E5D6F2;
+
+    --ion-font-family: 'Poppins', sans-serif;
+
+    --ion-text-color-rgb: white;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('../assets/fonts/Poppins/Poppins-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins Light';
+    src: url('../assets/fonts/Poppins/Poppins-Light.ttf');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins Medium';
+    src: url('../assets/fonts/Poppins/Poppins-Medium.ttf');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins SemiBold';
+    src: url('../assets/fonts/Poppins/Poppins-SemiBold.ttf');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins Bold';
+    src: url('../assets/fonts/Poppins/Poppins-Bold.ttf');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins Italic';
+    src: url('../assets/fonts/Poppins/Poppins-Italic.ttf');
+    font-weight: 600;
+    font-style: normal;
+}

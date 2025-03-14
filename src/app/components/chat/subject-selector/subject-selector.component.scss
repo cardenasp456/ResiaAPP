@@ -1,0 +1,61 @@
+/* Contenedor del selector */
+.subjects-container {
+    padding: 10px;
+    overflow: hidden;
+}
+
+/* Título con icono */
+.subjects-title {
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+/* Scroll horizontal */
+.subjects-scroll {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc transparent;
+}
+
+/* Estilo de cada materia */
+.subject-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    min-width: 80px;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Cuando la materia está seleccionada */
+.subject-item.selected {
+    transform: scale(0.9); /* Hace más pequeño el ítem */
+    opacity: 0.8; /* Hace que parezca presionado */
+}
+
+/* Icono de materia */
+.subject-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+}
+
+/* Nombre de la materia */
+.subject-name {
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}

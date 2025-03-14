@@ -1,0 +1,13 @@
+<div class="search-container">
+    <textarea 
+        placeholder="Pregunta lo que quieras" 
+        [(ngModel)]="query" 
+        (input)="limitText()" 
+        class="search-input"
+        rows="1"
+        maxlength="255">
+    </textarea>
+    <button class="search-button" (click)="performSearch()">
+        <i class="pi pi-send"></i>
+    </button>
+</div>

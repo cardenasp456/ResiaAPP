@@ -1,0 +1,17 @@
+<div class="subjects-container">
+    <h3 class="subjects-title">Materias <i class="pi pi-arrow-right"></i></h3>
+    <div class="subjects-scroll">
+        @for (subject of subjects; track subject.name) {
+            <div class="subject-item" 
+                (click)="selectSubject(subject)" 
+                [ngClass]="{'selected': selectedSubject === subject.name}">
+                <div class="subject-icon" 
+                     [style.background-color]="subject.color">
+                    <i class="{{ subject.icon }}" 
+                       [style.color]="subject.lightColor"></i>
+                </div>
+                <span class="subject-name">{{ subject.name }}</span>
+            </div>
+        }
+    </div>
+</div>
