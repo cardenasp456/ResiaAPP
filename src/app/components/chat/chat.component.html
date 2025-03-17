@@ -1,10 +1,11 @@
 <div class="chat-container">
     <!-- Selector de Materias (Solo se muestra si no hay búsqueda activa) -->
-    <app-subject-selector *ngIf="!searchActive" @fadeInOut></app-subject-selector>
+    <app-subject-selector (subjectSelected)="onSubjectSelected($event)" *ngIf="!searchActive" @fadeInOut></app-subject-selector>
     
     <!-- Componente de respuesta (Solo se muestra si hay búsqueda activa) -->
-    <app-respone *ngIf="searchActive" @fadeInOut></app-respone>
+    <app-respone *ngIf="searchActive" [message]="responseMessage" @fadeInOut></app-respone>
 
     <!-- Componente de búsqueda (Siempre visible) -->
     <app-search (searchEvent)="handleSearch()"></app-search>
 </div>
+ 

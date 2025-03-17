@@ -1,1 +1,34 @@
-<p>response-modal works!</p>
+<div class="alert-container flex flex-col ion-text-center gap-20">
+  
+    <ion-header class="ion-no-border">
+      
+      <!-- <ion-button class="close-up" shape="circle" fill="clear" (click)="closeModal()">
+        <img src="assets/icon/close.svg" alt=""/>
+      </ion-button> -->
+  
+      <div class="close">
+        <button class="close-up" (click)="closeModal()">
+          <img src="/assets/icon/x-button.svg" alt=""/>
+        </button>
+      </div>
+  
+      <div class="circle flex" >
+        <img [src]="getIcon()" alt="modal icon">
+      </div>
+  
+    </ion-header>
+  
+    
+    <div class="alert-body flex flex-col gap-20">
+      <h3 class="title-modal" [ngClass]="{ 'text-danger' : type === 'warning-danger.svg' }" [innerHTML]="title"></h3>
+      <p *ngIf="subtitle" class="subtitle">{{ subtitle }}</p>
+    </div>
+  
+    <p class="last-message" *ngIf="lastMessage">{{ lastMessage }}</p>
+  
+    <ion-footer class="ion-no-border footer flex flex-row gap-20">
+      <button class="button-secondary" (click)="closeModal()">Cerrar</button>
+    </ion-footer>
+  
+  </div>
+  

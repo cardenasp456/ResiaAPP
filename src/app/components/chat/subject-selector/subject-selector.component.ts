@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-subject-selector',
@@ -10,6 +10,8 @@ import { Component } from '@angular/core';
   styleUrl: './subject-selector.component.scss'
 })
 export class SubjectSelectorComponent {
+
+  @Output() subjectSelected = new EventEmitter<any>();
 
   selectedSubject: string | null = null; 
   
@@ -26,5 +28,6 @@ export class SubjectSelectorComponent {
   selectSubject(subject: any) {
     this.selectedSubject = subject.name; // Guarda la materia seleccionada
     console.log('Materia seleccionada:', subject.name);
+    this.subjectSelected.emit(subject);
   }
 }

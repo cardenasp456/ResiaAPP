@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IonicModule, ModalController } from '@ionic/angular';
-
+import { IonicModule } from '@ionic/angular';
+import {  ModalController } from '@ionic/angular/standalone';
 @Component({
   selector: 'app-response-modal',
   templateUrl: './response-modal.component.html',
@@ -13,7 +13,7 @@ import { IonicModule, ModalController } from '@ionic/angular';
   encapsulation: ViewEncapsulation.None
 })
 export class ResponseModalComponent {
-
+ 
   
   @Input() type!: string;
   @Input() title!: string;

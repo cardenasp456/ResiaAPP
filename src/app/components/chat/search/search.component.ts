@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
 import { ModalService } from '../../../services/modal/modal.service';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-search',
@@ -18,7 +19,8 @@ export class SearchComponent {
   query: string = '';
 
   constructor(
-    //private modalService: ModalService
+     private modalController: ModalController,
+      private modalService: ModalService,
   ) {}
 
   performSearch() {
@@ -28,7 +30,7 @@ export class SearchComponent {
       this.query = ''; // Limpia el input después de buscar
     }else{
       console.log('Error de inicio de sesión');
-      //this.modalService.openResponseModal('warning.png', 'Error de inicio de sesión' , 'Correo electrónico o contraseña incorrectos. Por favor, verifica las credenciales e inténtalo de nuevo.', '');
+      this.modalService.openResponseModal('warning.png', 'Error de búsqueda' , 'Debe llenar el cuadro de texto antes de hacer una pregunta. Por favor, ingrese su consulta e inténtelo de nuevo.', '');
     }
   }
 

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -15,11 +15,25 @@ export class ResponeComponent {
 
   fullResponse: string = "Aquí tienes una respuesta generada con datos dummy. Puedes modificar esto con datos reales más adelante.";
   response: string = "";
-  typingSpeed: number = 50; // Velocidad de escritura en milisegundos
+  typingSpeed: number = 10; // Velocidad de escritura en milisegundos
 
-  constructor() {
-    this.startTypingEffect();
+  constructor() { }
+
+  @Input() 
+  set message(value: string) { // ✅ Ahora `message` es un setter
+    if (value) {
+      console.log('Nuevo mensaje recibido:', value);
+      this.fullResponse = this.cleanWhitespace(value);
+      this.response = ""; // Reiniciar la respuesta antes de empezar el efecto
+      this.startTypingEffect();
+    }
   }
+
+  /** 🔹 Método para eliminar espacios en blanco innecesarios */
+  private cleanWhitespace(text: string): string {
+    return text.trimEnd(); // ❌ Elimina solo los espacios en blanco del final
+  }
+
 
   startTypingEffect() {
     let index = 0;
