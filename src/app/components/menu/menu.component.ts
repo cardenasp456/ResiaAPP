@@ -25,9 +25,9 @@ export class MenuComponent {
 
   items = [
     {
-      label: 'File',
+      label: 'Encuestas',
       icon: 'pi pi-file',
-      items: [{ label: 'New' }, { label: 'Open' }, { label: 'Save' }]
+      items: [{ label: 'Nueva' }, { label: 'Modificar' }]
     },
     {
       label: 'Edit',

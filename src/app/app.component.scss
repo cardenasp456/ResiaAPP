@@ -1,4 +1,10 @@
 .main {
+
+    display: flex;
+    flex-direction: column;
+    height: 100vh; 
+    overflow: hidden; 
+
     .app-container{
         display: flex;
         flex-direction: row; // Asegúrate de que los elementos hijos se alineen en una fila

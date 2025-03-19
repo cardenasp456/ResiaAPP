@@ -1,5 +1,7 @@
 /* Contenedor principal */
 .response-container {
+    max-height: 650px; /* Ajusta el tamaño máximo según tus necesidades */
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;

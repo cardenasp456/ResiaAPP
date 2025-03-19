@@ -6,6 +6,6 @@
     <app-respone *ngIf="searchActive" [message]="responseMessage" @fadeInOut></app-respone>
 
     <!-- Componente de búsqueda (Siempre visible) -->
-    <app-search (searchEvent)="handleSearch()"></app-search>
+    <app-search (searchEvent)="handleSearch($event)"></app-search>
 </div>
  

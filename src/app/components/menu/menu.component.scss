@@ -19,7 +19,8 @@
 /* Historial con scroll si es necesario */
 .chat-history {
   flex: 1;
-  overflow-y: auto;
+  overflow-y: auto;/* Habilita el scroll vertical */
+  max-height: 300px;
   padding: 10px;
   border-top: 1px solid #444;
 }

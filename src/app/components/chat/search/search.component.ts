@@ -15,7 +15,7 @@ import { ModalController } from '@ionic/angular/standalone';
 })
 export class SearchComponent {
   
-  @Output() searchEvent = new EventEmitter<void>(); // Emite un evento al padre
+  @Output() searchEvent = new EventEmitter<any>(); // Emite un evento al padre
   query: string = '';
 
   constructor(
@@ -24,12 +24,10 @@ export class SearchComponent {
   ) {}
 
   performSearch() {
-    console.log('Búsqueda iniciada:', this.query);
     if (this.query.trim()) {
-      this.searchEvent.emit(); // Notifica al padre que la búsqueda ha comenzado
+      this.searchEvent.emit(this.query); // Notifica al padre que la búsqueda ha comenzado
       this.query = ''; // Limpia el input después de buscar
     }else{
-      console.log('Error de inicio de sesión');
       this.modalService.openResponseModal('warning.png', 'Error de búsqueda' , 'Debe llenar el cuadro de texto antes de hacer una pregunta. Por favor, ingrese su consulta e inténtelo de nuevo.', '');
     }
   }

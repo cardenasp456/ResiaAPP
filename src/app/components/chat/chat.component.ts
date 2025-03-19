@@ -43,14 +43,18 @@ export class ChatComponent {
     private chatService: ChatService
   ) { }
 
-  handleSearch() {
+  handleSearch(searchQuery: any) {
+    console.log('Search query received:', searchQuery);
     if(this.subjectSelected === undefined){
       this.modalService.openResponseModal('warning.png', 'Error de selección' , 'Debe seleccionar una materia para continuar. Por favor, seleccione una materia e inténtelo de nuevo.', '');
     }else {
-      this.chatService.modificarPlan(this.subjectSelected, this.subjectSelected).subscribe(response => {
-         this.responseMessage = response.message.content;
-         console.log(this.responseMessage);
-         this.searchActive = true; // Oculta SubjectSelector y muestra ResponseComponent
+      // this.chatService.modificarPlan(this.subjectSelected, searchQuery).subscribe(response => {
+      //    this.responseMessage = response.message.content;
+      //    console.log(this.responseMessage);
+      //    this.searchActive = true; // Oculta SubjectSelector y muestra ResponseComponent
+      // });
+      this.chatService.createSurvey().subscribe(response => {
+        console.log('Survey created:', response);
       });
     }
   }
