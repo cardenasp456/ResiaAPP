@@ -18,4 +18,36 @@ import { IonicModule } from '@ionic/angular';
 import { appConfig } from './app/app.config';
 
 
-bootstrapApplication(AppComponent, appConfig);
+bootstrapApplication(AppComponent, {
+  
+    providers: [
+      importProvidersFrom(
+        IonicModule.forRoot(), 
+        IonicStorageModule.forRoot(),
+        FormsModule,
+        ReactiveFormsModule,
+        IonicModule,
+        CommonModule,
+      ),
+      provideHttpClient(withInterceptorsFromDi()),
+      { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+      { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+      { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+      { provide: HTTP_INTERCEPTORS, useClass: TrackingInterceptor, multi: true },
+      provideIonicAngular(),
+      provideRouter(
+        routes, 
+        withPreloading(PreloadAllModules), 
+        withHashLocation()
+      ),
+      provideAnimationsAsync(), 
+      providePrimeNG({
+        theme: { 
+          preset: Aura,
+          options: {
+            darkModeSelector: true 
+          }
+        }
+      })
+    ],
+  });

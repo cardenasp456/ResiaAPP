@@ -9,90 +9,46 @@
 
 /** Ionic CSS Variables **/
 :root {
-    /** primary **/
-    --ion-color-primary: #425CC7;
-    --ion-color-primary-rgb: 125, 1, 130;
+    /** Primary Colors **/
+    --ion-color-primary: #425CC7; /* Color primario del tema Aura */
+    --ion-color-primary-rgb: 66, 92, 199;
     --ion-color-primary-contrast: #ffffff;
     --ion-color-primary-contrast-rgb: 255, 255, 255;
-    --ion-color-primary-shade: #22004C;
-    --ion-color-primary-tint: #F8F0FF;
-    --ion-color-primary-hover: #B78AE0;
-
-    --ion-color-item-selected: #EDE2F7;
-    --ion-color-placeholder: #EBE6E4;
-
-    /** secondary **/
-    --ion-color-secondary: #6AAAE4;
-    --ion-color-secondary-rgb: 102, 2, 106;
-
-
-    /** tertiary **/
-    --ion-color-tertiary: #C8D6EB;
-    --ion-color-tertiary-light: #E4E4E4;
-    --ion-color-tertiary-rgb: 82, 96, 255;
-
-
-    /** quaternary **/
-    --ion-color-quaternary: #F4F2F6;
-    --ion-color-quaternary-rgb: 45, 211, 111;
-
-
-    /** warning **/
-    --ion-color-warning: #CAAE7A;
-    --ion-color-warning-rgb: 255, 196, 9;
-
-
-    /** danger **/
+    --ion-color-primary-shade: #3549a3;
+    --ion-color-primary-tint: #5a6fd1;
+  
+    /** Secondary Colors **/
+    --ion-color-secondary: #6AAAE4; /* Color secundario del tema Aura */
+    --ion-color-secondary-rgb: 106, 170, 228;
+    --ion-color-secondary-contrast: #ffffff;
+    --ion-color-secondary-contrast-rgb: 255, 255, 255;
+    --ion-color-secondary-shade: #5a92c3;
+    --ion-color-secondary-tint: #7bb8e8;
+  
+    /** Background and Text Colors **/
+    --ion-background-color: #F4F4F4; /* Fondo claro */
+    --ion-text-color: #000000; /* Texto oscuro */
+  
+    /** Dark Mode Colors **/
+    --ion-background-color-dark: #1E1E1E; /* Fondo oscuro */
+    --ion-text-color-dark: #FFFFFF; /* Texto claro */
+  
+    /** Other Colors **/
     --ion-color-danger: #EA0249;
-    --ion-color-danger-rgb: 235, 68, 90;
-    --ion-color-danger-contrast: #ffffff;
-    --ion-color-danger-contrast-rgb: 255, 255, 255;
-    --ion-color-danger-shade: #cf3c4f;
-    --ion-color-danger-tint: #ed576b;
-
-
-    /** dark **/
-    --ion-color-dark: #000000;
-    --ion-color-dark-rgb: 34, 36, 40;
-    --ion-color-dark-contrast: #ffffff;
-    --ion-color-dark-contrast-rgb: 255, 255, 255;
-    --ion-color-dark-shade: #1e2023;
-    --ion-color-dark-tint: #383a3e;
-
-    --ion-color-light: #F4F4F4;
-
-    --ion-color-gray: #CFD1D2;
-
-    // /** purple **/
-    --ion-color-purple: #510C76;
-    --ion-color-purple-rgb: 244, 245, 248;
-
-    /** blue **/
-    --ion-color-blue: #525CA3;
-    --ion-color-blue-rgb: 125, 1, 130;
-
-    /** king-blue **/
-    --ion-color-king-blue: #BCBC1C;
-    --ion-color-king-blue-rgb: 125, 1, 130;
-
-    /** coral **/
-    --ion-color-coral: #CF483E;
-    --ion-color-coral-rgb: 125, 1, 130;
-
-
-    //--ion-color-secondary-blue: #525CA3;
-    //--ion-color-secondary-king-blue: #BCBC1C;
-    //--ion-color-seconday-pink: #BE046B;
-    //--ion-color-secondary-coral: #CF483E;
-    //--ion-color-secondary-lavender: #886AA3;
-    //--ion-color-secondary-ochre: #CAAE7A;
-    //--ion-color-secondary-purple: #E5D6F2;
-
+    --ion-color-warning: #CAAE7A;
+    --ion-color-success: #28a745;
+    --ion-color-info: #17a2b8;
+  
+    /** Font **/
     --ion-font-family: 'Poppins', sans-serif;
-
-    --ion-text-color-rgb: white;
-}
-
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ion-background-color: var(--ion-background-color-dark);
+      --ion-text-color: var(--ion-text-color-dark);
+    }
+  }
 @font-face {
     font-family: 'Poppins';
     src: url('../assets/fonts/Poppins/Poppins-Regular.ttf') format('truetype');

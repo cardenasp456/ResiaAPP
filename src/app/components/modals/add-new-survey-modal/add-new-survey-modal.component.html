@@ -1,0 +1,40 @@
+<ion-content>
+    <form (ngSubmit)="submitSurvey()" #surveyForm="ngForm" class="modal-content">
+        <h2>Nueva Encuesta</h2>
+    
+        <!-- Campo para el nombre del estudiante -->
+        <ion-item>
+          <ion-label position="floating">Nombre del Estudiante</ion-label>
+          <ion-input type="text" required [(ngModel)]="surveyData.studentName" name="studentName"></ion-input>
+        </ion-item>
+    
+        <!-- Selector de materia -->
+        <ion-item>
+          <ion-label>Materia</ion-label>
+          <ion-select [(ngModel)]="surveyData.subject" name="subject" required>
+            <ion-select-option *ngFor="let subject of subjects" [value]="subject">{{ subject }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+    
+        <!-- Preguntas de la encuesta -->
+        <div class="survey-questions">
+          <div *ngFor="let question of questions; let i = index" class="question">
+            <ion-item>
+              <ion-label>{{ question }}</ion-label>
+            </ion-item>
+            <ion-radio-group [(ngModel)]="surveyData.answers[i]" [name]="'question' + i" required>
+              <ion-item *ngFor="let option of options">
+                <ion-label>{{ option.label }}</ion-label>
+                <ion-radio slot="start" [value]="option.value"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </div>
+        </div>
+    
+        <!-- Botones -->
+        <div class="button-group">
+          <ion-button expand="block" type="submit" [disabled]="!surveyForm.valid">Enviar</ion-button>
+          <ion-button expand="block" color="medium" (click)="closeModal()">Cancelar</ion-button>
+        </div>
+      </form>
+</ion-content>

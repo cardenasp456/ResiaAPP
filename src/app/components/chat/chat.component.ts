@@ -53,9 +53,6 @@ export class ChatComponent {
       //    console.log(this.responseMessage);
       //    this.searchActive = true; // Oculta SubjectSelector y muestra ResponseComponent
       // });
-      this.chatService.createSurvey().subscribe(response => {
-        console.log('Survey created:', response);
-      });
     }
   }
 

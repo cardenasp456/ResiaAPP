@@ -15,21 +15,12 @@ export class ChatService {
      const payload = {
       'subject': subject,
       'search': search
-  }
-  this.createSurvey();
+    }
      return this.http.post<any>(`${environment.apiUrl}/api/modificar_plan`, payload);
   }
 
   
-  createSurvey(): Observable<any> {
-    const payload = {
-      class_name: 'Español',
-      difficulty: 'media',
-      enjoyment: 'alta',
-      engagement: 'alta',
-      topics_of_interest: ['Literatura', 'Gramática', 'Redacción'],
-      comments: 'Los estudiantes disfrutan mucho de las clases de Español y encuentran los temas muy interesantes.'
-    };
+  createSurvey(payload: any): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/survey`, payload);
   }
 

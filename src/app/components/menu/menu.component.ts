@@ -3,6 +3,8 @@ import { ButtonModule } from 'primeng/button';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { CardModule } from 'primeng/card';
 import { PrimeIcons } from 'primeng/api';
+import { ModalController } from '@ionic/angular/standalone';
+import { AddNewSurveyModalComponent } from '../modals/add-new-survey-modal/add-new-survey-modal.component';
 
 @Component({
   selector: 'app-menu',
@@ -18,7 +20,10 @@ import { PrimeIcons } from 'primeng/api';
 export class MenuComponent {
 
 
-  constructor(private ngZone: NgZone) {}
+  constructor(
+    private ngZone: NgZone,
+    private modalController: ModalController
+  ) {}
 
   ngOnInit() {
   }
@@ -27,7 +32,7 @@ export class MenuComponent {
     {
       label: 'Encuestas',
       icon: 'pi pi-file',
-      items: [{ label: 'Nueva' }, { label: 'Modificar' }]
+      items: [{ label: 'Nueva', command: () => this.openNewSurveyModal() }, { label: 'Modificar' }]
     },
     {
       label: 'Edit',
@@ -52,6 +57,14 @@ export class MenuComponent {
   openChat(chatId: number) {
     console.log('Abriendo chat con ID:', chatId);
     // Aquí puedes agregar la lógica para abrir un chat específico
+  }
+
+  async openNewSurveyModal() {
+    const modal = await this.modalController.create({
+      component: AddNewSurveyModalComponent
+    });
+  
+    await modal.present();
   }
 
 }
