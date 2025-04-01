@@ -1,0 +1,20 @@
+.modal-content {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .survey-details {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  ion-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  ion-button {
+    margin-left: 10px;
+  }

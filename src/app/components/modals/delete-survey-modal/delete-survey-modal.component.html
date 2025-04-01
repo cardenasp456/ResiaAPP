@@ -1,0 +1,20 @@
+<ion-content>
+    <div class="modal-content">
+        <h2>Lista de Encuestas</h2>
+
+        <!-- Lista de encuestas -->
+        <ion-list *ngIf="surveys.length > 0">
+        <ion-item *ngFor="let survey of surveys; let i = index">
+            <div class="survey-details">
+            <h3>{{ survey.student_name }}</h3>
+            <p><strong>Materia:</strong> {{ survey.subject }}</p>
+            <p><strong>Respuestas:</strong> {{ survey.answers.join(', ') }}</p>
+            </div>
+            <ion-button color="danger" (click)="deleteSurveyById(survey.summary_id, i, survey.subject)">Eliminar</ion-button>
+        </ion-item>
+        </ion-list>
+
+        <!-- Botón para cerrar el modal -->
+        <ion-button expand="block" color="medium" (click)="closeModal()">Cerrar</ion-button>
+    </div>
+</ion-content>

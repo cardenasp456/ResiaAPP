@@ -5,6 +5,8 @@ import { CardModule } from 'primeng/card';
 import { PrimeIcons } from 'primeng/api';
 import { ModalController } from '@ionic/angular/standalone';
 import { AddNewSurveyModalComponent } from '../modals/add-new-survey-modal/add-new-survey-modal.component';
+import { DeleteSurveyModalComponent } from '../modals/delete-survey-modal/delete-survey-modal.component';
+import { ChatService } from '../../services/chat/chat.service';
 
 @Component({
   selector: 'app-menu',
@@ -22,7 +24,8 @@ export class MenuComponent {
 
   constructor(
     private ngZone: NgZone,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private chatService: ChatService,
   ) {}
 
   ngOnInit() {
@@ -32,12 +35,23 @@ export class MenuComponent {
     {
       label: 'Encuestas',
       icon: 'pi pi-file',
-      items: [{ label: 'Nueva', command: () => this.openNewSurveyModal() }, { label: 'Modificar' }]
+      items: [
+        { label: 'Nueva', command: () => this.openNewSurveyModal() }, 
+        { label: 'Eliminar', command: () => this.openDeleteSurveyModal() },
+      ]
     },
     {
-      label: 'Edit',
+      label: 'Modificar planes de estudio',
       icon: 'pi pi-pencil',
-      items: [{ label: 'Undo' }, { label: 'Redo' }]
+      items: [
+        { label: 'Español', command: () => this.openEditCurriculumModal('Español', '7')  }, 
+        { label: 'Matemáticas' }, 
+        { label: 'Sociales' }, 
+        { label: 'Naturales' }, 
+        { label: 'Artes' }, 
+        { label: 'Música' }, 
+        { label: 'Geometría' }
+      ]
     }
   ];
 
@@ -65,6 +79,23 @@ export class MenuComponent {
     });
   
     await modal.present();
+  }
+
+  async openDeleteSurveyModal() {
+    const modal = await this.modalController.create({
+      component: DeleteSurveyModalComponent
+    });
+  
+    await modal.present();
+  }
+
+  openEditCurriculumModal(course_name: string, grade_level: string) {
+    this.chatService.getCurriculum({ course_name, grade_level }).subscribe(
+      (response) => {
+        console.log('Curriculum data:', response);
+        // Aquí puedes manejar la respuesta del curriculum
+      }
+    );
   }
 
 }
