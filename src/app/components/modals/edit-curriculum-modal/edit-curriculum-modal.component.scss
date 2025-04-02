@@ -1,0 +1,67 @@
+.modal-content {
+    padding: 20px;
+    background-color: var(--ion-background-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--ion-color-primary);
+    margin-bottom: 20px;
+  }
+  
+  .unit {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid var(--ion-color-light);
+    border-radius: 8px;
+    background-color: var(--ion-color-light-tint);
+  }
+  
+  .unit h3 {
+    font-size: 1.2rem;
+    color: var(--ion-color-secondary);
+    margin-bottom: 10px;
+  }
+  
+  h4 {
+    font-size: 1rem;
+    color: var(--ion-color-medium);
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  
+  ion-item {
+    --background: transparent;
+    --border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  ion-label {
+    font-size: 0.9rem;
+    color: var(--ion-color-dark);
+  }
+  
+  ion-input {
+    --padding-start: 10px;
+    --padding-end: 10px;
+  }
+  
+  .button-group {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  ion-button {
+    --border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  ion-button[color="medium"] {
+    --background: var(--ion-color-light);
+    --color: var(--ion-color-dark);
+  }

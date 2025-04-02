@@ -1,0 +1,79 @@
+<ion-content>
+    <form (ngSubmit)="submitEdit()" #editForm="ngForm" class="modal-content">
+      <h2>Editar Plan de Estudio</h2>
+  
+      <!-- Campo para el nombre del curso -->
+      <ion-item>
+        <ion-label position="floating">Nombre del Curso</ion-label>
+        <ion-input type="text" required [(ngModel)]="curriculumData.course_name" name="course_name"></ion-input>
+      </ion-item>
+  
+      <!-- Campo para el nivel de grado -->
+      <ion-item>
+        <ion-label position="floating">Nivel de Grado</ion-label>
+        <ion-input type="text" required [(ngModel)]="curriculumData.grade_level" name="grade_level"></ion-input>
+      </ion-item>
+  
+      <!-- Lista de Unidades -->
+      <div *ngFor="let unit of curriculumData.units; let i = index" class="unit">
+        <h3>Unidad {{ i + 1 }}</h3>
+  
+        <!-- Nombre de la Unidad -->
+        <ion-item>
+          <ion-label position="floating">Nombre de la Unidad</ion-label>
+          <ion-input type="text" required [(ngModel)]="unit.unit_name" [name]="'unit_name_' + i"></ion-input>
+        </ion-item>
+  
+
+            <!-- Objetivos -->
+        <div *ngFor="let objective of unit.objectives; let j = index">
+            <ion-item>
+            <ion-label position="floating">Objetivo {{ j + 1 }}</ion-label>
+            <ion-input
+                type="text"
+                required
+                [value]="unit.objectives[j]"
+                (input)="onObjectiveInput($event, i, j)"
+                [name]="'objective_' + i + '_' + j"
+            ></ion-input>
+            </ion-item>
+        </div>
+        <ion-button expand="block" size="small" color="secondary" (click)="addObjective(i)">Añadir Objetivo</ion-button>
+        
+        <!-- Temas -->
+        <div *ngFor="let topic of unit.topics; let k = index">
+          <h4>Tema {{ k + 1 }}</h4>
+          <ion-item>
+            <ion-label position="floating">Nombre del Tema</ion-label>
+            <ion-input type="text" required [(ngModel)]="topic.topic_name" [name]="'topic_name_' + i + '_' + k"></ion-input>
+          </ion-item>
+  
+        <!-- Contenido del Tema -->
+        <div *ngFor="let content of topic.content; let l = index">
+            <ion-item>
+            <ion-label position="floating">Contenido {{ l + 1 }}</ion-label>
+            <ion-input
+                type="text"
+                required
+                [value]="topic.content[l]"
+                (input)="onContentInput($event, i, k, l)"
+                [name]="'content_' + i + '_' + k + '_' + l"
+            ></ion-input>
+            </ion-item>
+        </div>
+        
+        <ion-button expand="block" size="small" color="secondary" (click)="addContent(i, k)">Añadir Contenido</ion-button>
+        </div>
+        <ion-button expand="block" size="small" color="secondary" (click)="addTopic(i)">Añadir Tema</ion-button>
+      </div>
+  
+      <!-- Botón para añadir una nueva unidad -->
+      <ion-button expand="block" color="primary" (click)="addUnit()">Añadir Unidad</ion-button>
+  
+      <!-- Botones -->
+      <div class="button-group">
+        <ion-button expand="block" type="submit" [disabled]="!editForm.valid">Guardar Cambios</ion-button>
+        <ion-button expand="block" color="medium" (click)="closeModal()">Cancelar</ion-button>
+      </div>
+    </form>
+  </ion-content>

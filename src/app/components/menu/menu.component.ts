@@ -7,6 +7,7 @@ import { ModalController } from '@ionic/angular/standalone';
 import { AddNewSurveyModalComponent } from '../modals/add-new-survey-modal/add-new-survey-modal.component';
 import { DeleteSurveyModalComponent } from '../modals/delete-survey-modal/delete-survey-modal.component';
 import { ChatService } from '../../services/chat/chat.service';
+import { EditCurriculumModalComponent } from '../modals/edit-curriculum-modal/edit-curriculum-modal.component';
 
 @Component({
   selector: 'app-menu',
@@ -44,13 +45,13 @@ export class MenuComponent {
       label: 'Modificar planes de estudio',
       icon: 'pi pi-pencil',
       items: [
-        { label: 'Español', command: () => this.openEditCurriculumModal('Español', '7')  }, 
-        { label: 'Matemáticas' }, 
-        { label: 'Sociales' }, 
-        { label: 'Naturales' }, 
-        { label: 'Artes' }, 
-        { label: 'Música' }, 
-        { label: 'Geometría' }
+        { label: 'Español', command: () => this.openEditCurriculumModal23('Español', '7')  }, 
+        { label: 'Matemáticas', command: () => this.openEditCurriculumModal23('Matemáticas', '7')}, 
+        { label: 'Sociales', command: () => this.openEditCurriculumModal23('Sociales', '7') }, 
+        { label: 'Naturales', command: () => this.openEditCurriculumModal23('Naturales', '7') }, 
+        { label: 'Artes', command: () => this.openEditCurriculumModal23('Artes', '7') }, 
+        { label: 'Música', command: () => this.openEditCurriculumModal23('Música', '7') }, 
+        { label: 'Geometría', command: () => this.openEditCurriculumModal23('Geometría', '7') }
       ]
     }
   ];
@@ -94,6 +95,29 @@ export class MenuComponent {
       (response) => {
         console.log('Curriculum data:', response);
         // Aquí puedes manejar la respuesta del curriculum
+      }
+    );
+  }
+
+  async openEditCurriculumModalh(curriculumData: any) {
+    const modal = await this.modalController.create({
+      component: EditCurriculumModalComponent,
+      componentProps: { curriculumData: curriculumData }
+    });
+
+    await modal.present();
+
+    const { data } = await modal.onDidDismiss();
+    if (data) {
+      console.log('Plan de estudio actualizado:', data);
+    }
+  }
+
+  async openEditCurriculumModal23(course_name: string, grade_level: string) {
+    this.chatService.getCurriculum({ course_name, grade_level }).subscribe(
+      (response) => { 
+        console.log('Curriculum data:', response);
+        this.openEditCurriculumModalh(response);
       }
     );
   }
