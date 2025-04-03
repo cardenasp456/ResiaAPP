@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, NgZone } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, NgZone, Output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { CardModule } from 'primeng/card';
@@ -22,6 +22,8 @@ import { EditCurriculumModalComponent } from '../modals/edit-curriculum-modal/ed
 })
 export class MenuComponent {
 
+  @Output() chatOpened = new EventEmitter<void>(); 
+  chatOpen = false; 
 
   constructor(
     private ngZone: NgZone,
@@ -75,6 +77,8 @@ export class MenuComponent {
   newChat() {
     console.log('Nuevo chat creado');
     this.chats.unshift({ id: this.chats.length + 1, title: 'Nuevo chat' });
+    this.chatOpen = true; 
+    this.chatOpened.emit(); 
   }
 
   openChat(chatId: number) {

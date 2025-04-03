@@ -3,9 +3,13 @@
   <label class="title">RESIA</label>
 
   <div class="app-container">
-    <app-menu class="app-menu"></app-menu>
+    <app-menu class="app-menu" (chatOpened)="onChatOpened()"></app-menu>
 
-    <app-chat class="app-chat"></app-chat>
+    <!-- Mostrar app-home solo si no hay un chat abierto -->
+    <app-home class="app-home" *ngIf="!chatOpen"></app-home>
+
+    <!-- Mostrar app-chat solo si hay un chat abierto -->
+    <app-chat class="app-chat" *ngIf="chatOpen"></app-chat>
   </div>
 
 </main>

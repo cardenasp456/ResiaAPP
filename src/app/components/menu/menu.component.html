@@ -6,7 +6,12 @@
 
     <!-- Botón de nuevo chat -->
     <div class="button-container">
-        <p-button icon="pi pi-plus" label="Nuevo Chat" (click)="newChat()"/>
+        <p-button 
+            icon="pi pi-plus" 
+            label="Nuevo Chat" 
+            (click)="newChat()" 
+            [disabled]="chatOpen">
+        </p-button>
     </div>
 
     <!-- Card del historial de chats -->
