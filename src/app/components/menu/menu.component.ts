@@ -30,6 +30,7 @@ export class MenuComponent {
   ) {}
 
   ngOnInit() {
+    this.getChats();
   }
 
   items = [
@@ -57,16 +58,23 @@ export class MenuComponent {
   ];
 
   chats = [
-    { id: 1, label: 'Hcp DataReader Issue' },
-    { id: 2, label: 'Simulacro caída SaaS CRM' },
-    { id: 3, label: 'Error Gradle Android Studio' },
-    { id: 4, label: 'Pruebas Safari en Windows' },
-    { id: 5, label: 'Script para crear tabla' }
+    { id: 1, title: 'Hcp DataReader Issue' },
   ];
+
+  getChats() {
+    this.chatService.getChatHistory().subscribe(
+      (response) => {
+        this.chats = response;
+      },
+      (error) => {
+        console.error('Error al obtener el historial de chats:', error);
+      }
+    );
+  }
 
   newChat() {
     console.log('Nuevo chat creado');
-    this.chats.push({ id: this.chats.length + 1, label: 'Nuevo chat' });
+    this.chats.unshift({ id: this.chats.length + 1, title: 'Nuevo chat' });
   }
 
   openChat(chatId: number) {

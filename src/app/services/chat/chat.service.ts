@@ -166,4 +166,8 @@ export class ChatService {
     return this.http.post<any>(`${environment.apiUrl}/editCurriculum`, updatedData);
   }
 
+  getChatHistory(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/chat/history`);
+  }
+
 }

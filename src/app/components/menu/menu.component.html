@@ -15,7 +15,7 @@
             @for (chat of chats; track chat.id) {
                 <div class="chat-item" (click)="openChat(chat.id)">
                     <i class="pi pi-comments"></i>
-                    <span>{{ chat.label }}</span>
+                    <span>{{ chat.title }}</span>
                 </div>
             }
         </div>
