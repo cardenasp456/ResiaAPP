@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SubjectSelectorComponent } from './subject-selector/subject-selector.component';
 import { SearchComponent } from './search/search.component';
 import { ResponeComponent } from './respone/respone.component';
@@ -33,6 +33,9 @@ import { emit } from 'process';
 })
 export class ChatComponent {
 
+  @Input() chatOpen: boolean = false; 
+  @Output() searchActivated = new EventEmitter<void>(); 
+
   searchActive: boolean = false;
   subjectSelected: any;
   responseMessage: string = " ";
@@ -43,6 +46,12 @@ export class ChatComponent {
     private chatService: ChatService
   ) { }
 
+  // Método que será llamado desde el padre
+  onChatOpened() {
+    console.log('chatComponent: Chat abierto');
+    this.searchActive = false; // Actualiza el estado o realiza cualquier lógica adicional
+  }
+
   handleSearch(searchQuery: any) {
     console.log('Search query received:', searchQuery);
     if(this.subjectSelected === undefined){
@@ -52,6 +61,7 @@ export class ChatComponent {
          this.responseMessage = response.message.content;
          console.log(this.responseMessage);
          this.searchActive = true; // Oculta SubjectSelector y muestra ResponseComponent
+         this.searchActivated.emit(); 
       });
     }
   }

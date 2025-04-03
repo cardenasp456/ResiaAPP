@@ -9,7 +9,13 @@
     <app-home class="app-home" *ngIf="!chatOpen"></app-home>
 
     <!-- Mostrar app-chat solo si hay un chat abierto -->
-    <app-chat class="app-chat" *ngIf="chatOpen"></app-chat>
+    <app-chat 
+      class="app-chat" 
+      *ngIf="chatOpen" 
+      [chatOpen]="chatOpen" 
+      (searchActivated)="onSearchActivated()"
+    ></app-chat>
+
   </div>
 
 </main>

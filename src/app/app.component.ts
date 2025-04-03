@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { MenuComponent } from './components/menu/menu.component';
@@ -20,9 +20,13 @@ import { HomeComponent } from './components/home/home.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent  {
   title = 'resia_app';
-  chatOpen = false; 
+  chatOpen: boolean = false;
+  searchActiveInChild: boolean = false;
+  @Output() chatOpened = new EventEmitter<void>(); 
+  @ViewChild(MenuComponent) menuComponent!: MenuComponent; 
+  @ViewChild(ChatComponent) chatComponent!: ChatComponent; 
 
   constructor(
     //private modalService: ModalService
@@ -30,10 +34,20 @@ export class AppComponent {
 
   }
 
+  onSearchActivated() {
+    this.searchActiveInChild = true;
+    console.log('Search activated in child component:', this.searchActiveInChild);
+    // Notificar al componente hijo
+    if (this.menuComponent) {
+      this.menuComponent.onSearchActivated();
+    }
+  }
+
   // Método para manejar el evento de apertura de un chat
   onChatOpened() {
     this.chatOpen = true;
     console.log('Chat abierto, chatOpen:', this.chatOpen);
+    this.chatComponent.onChatOpened(); 
   }
 
   // Método para abrir un chat

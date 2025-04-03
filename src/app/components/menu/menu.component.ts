@@ -59,14 +59,19 @@ export class MenuComponent {
     }
   ];
 
-  chats = [
-    { id: 1, title: 'Hcp DataReader Issue' },
+  chats: { chat_id: number; title: string; history_id?: number; saved_at?: string }[] = [
+    { chat_id: 1, title: 'Hcp DataReader Issue' },
   ];
 
   getChats() {
     this.chatService.getChatHistory().subscribe(
-      (response) => {
-        this.chats = response;
+      (response: any) => {
+        console.log('Historial de chats:', response);
+        if (Array.isArray(response)) {
+          this.chats = response; // Asignar solo si es un array
+        } else {
+          console.error('La respuesta no es un array:', response);
+        }
       },
       (error) => {
         console.error('Error al obtener el historial de chats:', error);
@@ -76,9 +81,28 @@ export class MenuComponent {
 
   newChat() {
     console.log('Nuevo chat creado');
-    this.chats.unshift({ id: this.chats.length + 1, title: 'Nuevo chat' });
+
+    // Generar un nuevo chat_id y history_id únicos
+    const newChatId = this.chats.length > 0 ? Math.max(...this.chats.map(chat => chat.chat_id)) + 1 : 1;
+    const newHistoryId = this.chats.length > 0 ? Math.max(...this.chats.map(chat => chat.history_id || 0)) + 1 : 1;
+
+    // Agregar el nuevo chat al inicio del array
+    this.chats.unshift({
+      chat_id: newChatId,
+      history_id: newHistoryId,
+      saved_at: new Date().toISOString(),
+      title: 'Nuevo chat'
+    });
+
+    console.log('Lista de chats actualizada:', this.chats);
     this.chatOpen = true; 
     this.chatOpened.emit(); 
+  }
+
+  // Método para manejar la activación de búsqueda
+  onSearchActivated() {
+    this.getChats(); // Actualiza la lista de chats al activar la búsqueda
+    this.chatOpen = false; // Abre el chat al activar la búsqueda
   }
 
   openChat(chatId: number) {

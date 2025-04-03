@@ -17,8 +17,8 @@
     <!-- Card del historial de chats -->
     <p-card header="Historial de Chats" class="sidebar-menu chat-container">
         <div class="chat-history">
-            @for (chat of chats; track chat.id) {
-                <div class="chat-item" (click)="openChat(chat.id)">
+            @for (chat of chats; track chat.chat_id) {
+                <div class="chat-item" (click)="openChat(chat.chat_id)">
                     <i class="pi pi-comments"></i>
                     <span>{{ chat.title }}</span>
                 </div>
