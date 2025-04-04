@@ -24,6 +24,7 @@ export class AppComponent  {
   title = 'resia_app';
   chatOpen: boolean = false;
   searchActiveInChild: boolean = false;
+  selectedChatId:  number = 0;
   @Output() chatOpened = new EventEmitter<void>(); 
   @ViewChild(MenuComponent) menuComponent!: MenuComponent; 
   @ViewChild(ChatComponent) chatComponent!: ChatComponent; 
@@ -43,10 +44,19 @@ export class AppComponent  {
     }
   }
 
+  onChatIdReceived(chatId: number) {
+    this.chatOpen = false;
+    console.log('Chat ID recibido en el padre:', chatId);
+    this.selectedChatId = chatId; 
+    this.chatOpen = true; 
+    this.chatComponent.onChatOpened(); 
+  }
+
   // Método para manejar el evento de apertura de un chat
   onChatOpened() {
+    this.chatOpen = false;
+    this.selectedChatId = 0;
     this.chatOpen = true;
-    console.log('Chat abierto, chatOpen:', this.chatOpen);
     this.chatComponent.onChatOpened(); 
   }
 

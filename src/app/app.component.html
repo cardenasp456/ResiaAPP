@@ -3,7 +3,12 @@
   <label class="title">RESIA</label>
 
   <div class="app-container">
-    <app-menu class="app-menu" (chatOpened)="onChatOpened()"></app-menu>
+    <app-menu 
+      class="app-menu" 
+      (chatOpened)="onChatOpened()" 
+      (chatId)="onChatIdReceived($event)"
+      (exitChat)="onChatIdReceived($event)"
+    ></app-menu>
 
     <!-- Mostrar app-home solo si no hay un chat abierto -->
     <app-home class="app-home" *ngIf="!chatOpen"></app-home>
@@ -13,6 +18,7 @@
       class="app-chat" 
       *ngIf="chatOpen" 
       [chatOpen]="chatOpen" 
+      [chatId]="selectedChatId" 
       (searchActivated)="onSearchActivated()"
     ></app-chat>
 

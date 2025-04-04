@@ -23,6 +23,8 @@ import { EditCurriculumModalComponent } from '../modals/edit-curriculum-modal/ed
 export class MenuComponent {
 
   @Output() chatOpened = new EventEmitter<void>(); 
+  @Output() chatId = new EventEmitter<number>(); 
+  @Output() exitChat = new EventEmitter<number>(); 
   chatOpen = false; 
 
   constructor(
@@ -68,7 +70,7 @@ export class MenuComponent {
       (response: any) => {
         console.log('Historial de chats:', response);
         if (Array.isArray(response)) {
-          this.chats = response; // Asignar solo si es un array
+          this.chats = response.reverse();
         } else {
           console.error('La respuesta no es un array:', response);
         }
@@ -106,8 +108,7 @@ export class MenuComponent {
   }
 
   openChat(chatId: number) {
-    console.log('Abriendo chat con ID:', chatId);
-    // Aquí puedes agregar la lógica para abrir un chat específico
+    this.exitChat.emit(chatId); 
   }
 
   async openNewSurveyModal() {

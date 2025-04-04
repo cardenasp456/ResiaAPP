@@ -170,4 +170,8 @@ export class ChatService {
     return this.http.get<any>(`${environment.apiUrl}/chat/history`);
   }
 
+  getChatMessages(chatId: number): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/api/chat/${chatId}/messages`);
+  }
+
 }

@@ -35,6 +35,7 @@ export class ChatComponent {
 
   @Input() chatOpen: boolean = false; 
   @Output() searchActivated = new EventEmitter<void>(); 
+  @Input() chatId!: number | 0;
 
   searchActive: boolean = false;
   subjectSelected: any;
@@ -48,8 +49,25 @@ export class ChatComponent {
 
   // Método que será llamado desde el padre
   onChatOpened() {
+    console.log('holaaaaa', this.chatId)
     console.log('chatComponent: Chat abierto');
-    this.searchActive = false; // Actualiza el estado o realiza cualquier lógica adicional
+    if (this.chatId) {
+      this.openExistingChat(this.chatId); // Llama al método para abrir el chat existente
+    }else {
+      this.searchActive = false; // Actualiza el estado o realiza cualquier lógica adicional
+    }
+  }
+
+  openExistingChat(chatId: number) {
+    console.log('Chat ID recibido: chatcomnponent', chatId);
+    this.chatService.getChatMessages(chatId).subscribe(response => {
+      console.log('Curriculum data:', response);
+      // Aquí puedes manejar la respuesta del servicio
+      this.responseMessage = response.message_text;
+         console.log(this.responseMessage);
+         this.searchActive = true; // Oculta SubjectSelector y muestra ResponseComponent
+         this.searchActivated.emit(); 
+    });
   }
 
   handleSearch(searchQuery: any) {

@@ -1,0 +1,41 @@
+/* filepath: c:\Respos\resia_app\resia_app\src\app\components\home\home.component.scss */
+.home-container {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    height: 100vh; /* Altura completa de la ventana */
+    color: #fff;
+    text-align: center;
+  }
+  
+  .banner {
+    max-width: 600px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.002); /* Fondo translúcido */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra */
+  }
+  
+  .banner-logo {
+    width:  352px;
+    height: auto;
+    filter: invert(1) brightness(2); 
+  }
+
+  .logo-bosque {
+    width: 126px;
+    height: auto;
+    filter: invert(0.5) sepia(1) saturate(5) hue-rotate(-20deg) brightness(0.9);
+  }
+  
+  .banner-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .banner-subtitle {
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }

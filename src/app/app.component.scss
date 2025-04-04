@@ -16,6 +16,10 @@
         .app-chat {
             flex-grow: 1; // Esto hará que el chat ocupe el espacio restante
         }
+
+        .app-home {
+            flex-grow: 1; // Esto hará que el home ocupe el espacio restante
+        }
     }
 
     .title {
