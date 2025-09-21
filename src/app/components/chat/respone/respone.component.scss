@@ -1,40 +1,145 @@
-/* Contenedor principal */
+/* El contenedor que scrollea */
+.resp {
+  /* Altura controlada: ajusta a tu gusto */
+  max-height: clamp(380px, 70vh, 900px);
+  /* Si prefieres tamaño exacto del padre, usa height:100% y asegúrate que el padre tenga altura */
+  /* height: 100%; */
+
+  overflow: auto;          /* <-- aquí vive el scroll */
+  border: 1px solid var(--border);
+  border-radius: .9rem;
+  background: var(--card);
+
+  display: flex;
+  flex-direction: column;
+
+  /* Para que el sticky funcione y no aparezcan scrollbars dobles */
+  /* ningún hijo debe tener overflow propio */
+}
+
+// /* Header fijo dentro del scroll */
+// .head {
+//   position: sticky;
+//   top: 0;
+//   z-index: 1;
+//   background: var(--card);
+//   padding: 1rem;
+//   border-bottom: 1px solid var(--border);
+// }
+
+// /* El resto del contenido simplemente ocupa espacio */
+// .units,
+// .raw,
+// .response-container {
+//   padding: 1rem;
+//   /* MUY IMPORTANTE cuando el padre es flex y scrollea */
+//   min-height: 0;
+// }
+
+// /* Scrollbar “bonito” (opcional) */
+// .resp {
+//   scrollbar-width: thin;              /* Firefox */
+//   scrollbar-color: #3b3b3b transparent;
+// }
+.resp::-webkit-scrollbar { width: 10px; }
+.resp::-webkit-scrollbar-track { background: transparent; }
+.resp::-webkit-scrollbar-thumb {
+  background: #3b3b3b;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+
+  h1 { margin: 0 0 .25rem 0; font-size: 1.4rem; }
+  .muted { color: var(--muted); margin: 0; }
+
+  .actions {
+    display: flex; gap: .5rem; flex-wrap: wrap;
+    .search {
+      padding: .5rem .75rem;
+      border: 1px solid var(--border);
+      border-radius: .6rem;
+      background: var(--card);
+      color: var(--text);
+      min-width: 260px;
+    }
+    .btn {
+      padding: .5rem .75rem;
+      border-radius: .6rem;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      cursor: pointer;
+      transition: border-color .2s;
+      &:hover { border-color: var(--accent); }
+      &.outline { background: transparent; }
+    }
+  }
+}
+
+.units { display: grid; gap: .75rem; }
+.unit {
+  border: 1px solid var(--border);
+  border-radius: .9rem;
+  background: var(--card);
+
+  details {
+    summary {
+      list-style: none;
+      padding: .9rem 1rem;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border);
+
+      .unit-title {
+        display: flex; align-items: center; justify-content: space-between;
+        h2 { margin: 0; font-size: 1.05rem; }
+        .pill {
+          font-size: .8rem;
+          padding: .2rem .5rem;
+          border-radius: .6rem;
+          background: var(--pill);
+          color: var(--text);
+        }
+      }
+    }
+    .unit-body {
+      padding: 1rem;
+      display: grid; gap: .75rem;
+
+      h3 { margin: .5rem 0; font-size: 1rem; }
+      .objectives { margin: 0; padding-left: 1.25rem; }
+      .topics { display: grid; gap: .75rem; }
+      .topic {
+        border: 1px dashed var(--border);
+        border-radius: .75rem;
+        padding: .75rem;
+        h4 { margin: 0 0 .25rem 0; }
+        .desc { opacity: .95; }
+        .resources h5 { margin: .5rem 0 .25rem 0; font-size: .9rem; color: var(--muted); }
+      }
+    }
+  }
+}
+
+/* Fallback texto */
 .response-container {
-    max-height: 650px; /* Ajusta el tamaño máximo según tus necesidades */
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 800px;
+  border: 1px solid var(--border);
+  border-radius: .9rem;
+  background: var(--card);
+  padding: 1rem;
 }
-
-p {
-    color: white;
-}
-
-/* Caja de respuesta */
-.response-box {
-    background-color: #2d2d2d0a;
-    color: white;
-    padding: 15px;
-    border-radius: 12px;
-    width: 100%;
-    margin-bottom: 10px;
-    text-align: left;
-    font-size: 16px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-    white-space: pre-line; /* Mantiene los saltos de línea */
-}
-
-/* Efecto de cursor parpadeante */
-.response-box p::after {
-    content: "|";
-    display: inline-block;
-    margin-left: 2px;
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    50% { opacity: 0; }
+.response-box p { margin: 0; white-space: pre-wrap; }
+.muted { color: var(--muted); }
+.raw pre {
+  white-space: pre-wrap;
+  background: #0b1220;
+  border: 1px solid var(--border);
+  border-radius: .6rem;
+  padding: .75rem;
 }

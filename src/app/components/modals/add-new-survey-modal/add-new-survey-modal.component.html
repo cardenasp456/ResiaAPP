@@ -11,8 +11,14 @@
         <!-- Selector de materia -->
         <ion-item>
           <ion-label>Materia</ion-label>
-          <ion-select [(ngModel)]="surveyData.subject" name="subject" required>
-            <ion-select-option *ngFor="let subject of subjects" [value]="subject">{{ subject }}</ion-select-option>
+          <ion-select
+            [(ngModel)]="surveyData.subject"
+            name="subject"
+            required
+            [interfaceOptions]="{ cssClass: 'subject-select-alert' }">
+            <ion-select-option *ngFor="let subject of subjects" [value]="subject">
+              {{ subject }}
+            </ion-select-option>
           </ion-select>
         </ion-item>
     

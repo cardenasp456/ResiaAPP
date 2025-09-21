@@ -1,5 +1,69 @@
-<div class="response-container">
-    <div *ngIf="response" class="response-box">
-        <p>{{ response }}</p>
-    </div>
+<div class="resp">
+
+  <!-- Modo ESTRUCTURADO (si parseó) -->
+  <ng-container *ngIf="parsed() as d">
+    <header class="head">
+      <div>
+        <h1>{{ d.course_name }}</h1>
+        <p class="muted">Grado: {{ d.grade_level }}</p>
+      </div>
+      <div class="actions">
+        <input
+          type="search"
+          class="search"
+          placeholder="Buscar unidad/tema/objetivo…"
+          [value]="query()"
+          (input)="query.set(($any($event.target)).value)"
+        />
+        <button class="btn" (click)="copyMindmapMermaid()">Copiar mapa mental</button>
+        <button class="btn" (click)="downloadJson()">Descargar</button>
+        <button class="btn" (click)="openMermaidLive()">Abrir en Mermaid Live</button>
+        <button class="btn outline" (click)="toggleRaw()">
+          {{ showRaw() ? 'Ocultar crudo' : 'Ver crudo' }}
+        </button>
+      </div>
+    </header>
+
+    <section class="units" *ngIf="filteredUnits() as units">
+      <article class="unit" *ngFor="let u of units">
+        <details open>
+          <summary>
+            <div class="unit-title">
+              <h2>{{ u.unit_name }}</h2>
+              <span class="pill">{{ u.topics.length }} temas</span>
+            </div>
+          </summary>
+
+          <div class="unit-body">
+            <h3>Objetivos</h3>
+            <ul class="objectives">
+              <li *ngFor="let o of u.objectives">{{ o }}</li>
+            </ul>
+
+            <div class="topics">
+              <h3>Temas</h3>
+              <div class="topic" *ngFor="let t of u.topics">
+                <h4>{{ t.topic_name }}</h4>
+                <p class="desc" *ngIf="t.description">{{ t.description }}</p>
+
+                <div class="resources" *ngIf="t.resources?.length">
+                  <h5>Recursos</h5>
+                  <ul>
+                    <li *ngFor="let r of t.resources">{{ r }}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+      </article>
+
+      <p class="muted" *ngIf="!units.length">No hay resultados para “{{ query() }}”.</p>
+    </section>
+
+    <section class="raw" *ngIf="showRaw()">
+      <h3>Payload crudo</h3>
+      <pre>{{ rawPretty() }}</pre>
+    </section>
+  </ng-container>
 </div>

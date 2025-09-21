@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 export class EditCurriculumModalComponent {
 
   @Input() curriculumData: any;
+  trackByIndex = (_: number, __: any) => _;
 
   constructor(
     private modalController: ModalController, 
@@ -27,14 +28,9 @@ export class EditCurriculumModalComponent {
 
  
   // Método para manejar el evento input en objetivos
-  onObjectiveInput(event: Event, unitIndex: number, objectiveIndex: number) {
-    console.log('unitIndex:', unitIndex);
-    const inputElement = event.target as HTMLInputElement;
-    if (inputElement) {
-      this.curriculumData.units[unitIndex].objectives[objectiveIndex] = inputElement.value;
-    }
+   onObjectiveInput(i: number, j: number, value: string) {
+    this.curriculumData.units[i].objectives[j] = value; // sin crear nuevo array
   }
-
   // Método para manejar el evento input en contenido
   onContentInput(event: Event, unitIndex: number, topicIndex: number, contentIndex: number) {
     const inputElement = event.target as HTMLInputElement;

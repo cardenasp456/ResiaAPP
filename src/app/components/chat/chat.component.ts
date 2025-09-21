@@ -61,12 +61,12 @@ export class ChatComponent {
   openExistingChat(chatId: number) {
     console.log('Chat ID recibido: chatcomnponent', chatId);
     this.chatService.getChatMessages(chatId).subscribe(response => {
-      console.log('Curriculum data:', response);
-      // Aquí puedes manejar la respuesta del servicio
-      this.responseMessage = response.message_text;
-         console.log(this.responseMessage);
-         this.searchActive = true; // Oculta SubjectSelector y muestra ResponseComponent
-         this.searchActivated.emit(); 
+        console.log('Curriculum data:', response);
+        // Aquí puedes manejar la respuesta del servicio
+        this.responseMessage = response;
+        console.log(this.responseMessage);
+        this.searchActive = true; // Oculta SubjectSelector y muestra ResponseComponent
+        this.searchActivated.emit(); 
     });
   }
 
@@ -76,7 +76,7 @@ export class ChatComponent {
       this.modalService.openResponseModal('warning.png', 'Error de selección' , 'Debe seleccionar una materia para continuar. Por favor, seleccione una materia e inténtelo de nuevo.', '');
     }else {
       this.chatService.modificarPlan(this.subjectSelected.name, searchQuery).subscribe(response => {
-         this.responseMessage = response.message.content;
+         this.responseMessage = response;
          console.log(this.responseMessage);
          this.searchActive = true; // Oculta SubjectSelector y muestra ResponseComponent
          this.searchActivated.emit(); 

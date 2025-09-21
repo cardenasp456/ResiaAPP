@@ -94,3 +94,27 @@ ion-modal {
         width: 100%;
     }
 }
+
+/* Aplica al overlay del alert del ion-select */
+.subject-select-alert {
+  --background: #121212; /* opcional, fondo oscuro */
+}
+
+/* Texto de las opciones, título y mensaje en blanco */
+.subject-select-alert .alert-radio-label,
+.subject-select-alert .alert-checkbox-label,
+.subject-select-alert .alert-title,
+.subject-select-alert .alert-message {
+  color: #fff !important;
+}
+
+/* Botones CANCEL/OK en blanco (opcional) */
+.subject-select-alert .alert-button {
+  color: #fff !important;
+}
+
+/* Círculo del radio/checkbox en blanco (opcional) */
+.subject-select-alert .alert-radio-icon,
+.subject-select-alert .alert-checkbox-icon {
+  border-color: #fff !important;
+}

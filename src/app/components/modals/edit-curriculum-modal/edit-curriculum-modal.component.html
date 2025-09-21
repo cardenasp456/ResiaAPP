@@ -25,18 +25,18 @@
         </ion-item>
   
 
-            <!-- Objetivos -->
-        <div *ngFor="let objective of unit.objectives; let j = index">
-            <ion-item>
+        <!-- Objetivos -->
+        <div *ngFor="let objective of unit.objectives; let j = index; trackBy: trackByIndex">
+          <ion-item>
             <ion-label position="floating">Objetivo {{ j + 1 }}</ion-label>
             <ion-input
-                type="text"
-                required
-                [value]="unit.objectives[j]"
-                (input)="onObjectiveInput($event, i, j)"
-                [name]="'objective_' + i + '_' + j"
-            ></ion-input>
-            </ion-item>
+              type="text"
+              [(ngModel)]="unit.objectives[j]"
+              [ngModelOptions]="{ updateOn: 'blur' }"
+              name="objective_{{i}}_{{j}}"
+              (ionInput)="$event.stopPropagation()">
+            </ion-input>
+          </ion-item>
         </div>
         <ion-button expand="block" size="small" color="secondary" (click)="addObjective(i)">Añadir Objetivo</ion-button>
         
@@ -49,17 +49,17 @@
           </ion-item>
   
         <!-- Contenido del Tema -->
-        <div *ngFor="let content of topic.content; let l = index">
-            <ion-item>
+        <div *ngFor="let content of topic.content; let l = index; trackBy: trackByIndex">
+          <ion-item>
             <ion-label position="floating">Contenido {{ l + 1 }}</ion-label>
             <ion-input
-                type="text"
-                required
-                [value]="topic.content[l]"
-                (input)="onContentInput($event, i, k, l)"
-                [name]="'content_' + i + '_' + k + '_' + l"
-            ></ion-input>
-            </ion-item>
+              type="text"
+              [(ngModel)]="topic.content[l]"
+              [ngModelOptions]="{ updateOn: 'blur' }"
+              name="content_{{i}}_{{k}}_{{l}}"
+              (ionInput)="$event.stopPropagation()">
+            </ion-input>
+          </ion-item>
         </div>
         
         <ion-button expand="block" size="small" color="secondary" (click)="addContent(i, k)">Añadir Contenido</ion-button>
