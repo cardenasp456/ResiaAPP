@@ -1,0 +1,30 @@
+.form-wrapper {
+  padding-bottom: 72px; // espacio para que no tape el botón de header
+}
+
+.questions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px 0;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.options-title {
+  margin: 8px 0 4px;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.option-input {
+  width: 100%;
+}
+
+.footer-space {
+  height: 16px;
+}

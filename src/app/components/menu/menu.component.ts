@@ -2,21 +2,19 @@ import { ChangeDetectorRef, Component, EventEmitter, NgZone, Output } from '@ang
 import { ButtonModule } from 'primeng/button';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { CardModule } from 'primeng/card';
-import { PrimeIcons } from 'primeng/api';
 import { ModalController } from '@ionic/angular/standalone';
 import { AddNewSurveyModalComponent } from '../modals/add-new-survey-modal/add-new-survey-modal.component';
 import { DeleteSurveyModalComponent } from '../modals/delete-survey-modal/delete-survey-modal.component';
 import { ChatService } from '../../services/chat/chat.service';
 import { EditCurriculumModalComponent } from '../modals/edit-curriculum-modal/edit-curriculum-modal.component';
+import { StudentStatusTestModalComponent } from '../modals/student-status-test-modal/student-status-test-modal.component';
+import { CreateStudentTestModalComponent } from '../modals/create-student-test-modal/create-student-test-modal.component';
+import { StudentStatusCheckModalComponent } from '../modals/student-status-check-modal/student-status-check-modal.component';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [
-    PanelMenuModule,
-    ButtonModule,
-    CardModule
-  ],
+  imports: [PanelMenuModule, ButtonModule, CardModule],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
 })
@@ -58,6 +56,16 @@ export class MenuComponent {
         { label: 'Música', command: () => this.openEditCurriculumModal23('Música', '7') }, 
         { label: 'Geometría', command: () => this.openEditCurriculumModal23('Geometría', '7') }
       ]
+    },
+    {
+      label: 'Prueba de estado de estudiante',
+      icon: 'pi pi-user-check',
+      items: [
+        { label: 'Iniciar prueba', icon: 'pi pi-play', command: () => this.openStudentStatusTestModal() },
+        { label: 'Consultar estado', icon: 'pi pi-search', command: () => this.openStudentStatusCheckModal() },
+        { label: 'Crear nueva prueba', icon: 'pi pi-plus', command: () => this.openCreateStudentTestModal() }
+   
+      ]
     }
   ];
 
@@ -83,12 +91,9 @@ export class MenuComponent {
 
   newChat() {
     console.log('Nuevo chat creado');
-
-    // Generar un nuevo chat_id y history_id únicos
     const newChatId = this.chats.length > 0 ? Math.max(...this.chats.map(chat => chat.chat_id)) + 1 : 1;
     const newHistoryId = this.chats.length > 0 ? Math.max(...this.chats.map(chat => chat.history_id || 0)) + 1 : 1;
 
-    // Agregar el nuevo chat al inicio del array
     this.chats.unshift({
       chat_id: newChatId,
       history_id: newHistoryId,
@@ -101,10 +106,9 @@ export class MenuComponent {
     this.chatOpened.emit(); 
   }
 
-  // Método para manejar la activación de búsqueda
   onSearchActivated() {
-    this.getChats(); // Actualiza la lista de chats al activar la búsqueda
-    this.chatOpen = false; // Abre el chat al activar la búsqueda
+    this.getChats();
+    this.chatOpen = false;
   }
 
   openChat(chatId: number) {
@@ -115,7 +119,6 @@ export class MenuComponent {
     const modal = await this.modalController.create({
       component: AddNewSurveyModalComponent
     });
-  
     await modal.present();
   }
 
@@ -123,7 +126,6 @@ export class MenuComponent {
     const modal = await this.modalController.create({
       component: DeleteSurveyModalComponent
     });
-  
     await modal.present();
   }
 
@@ -131,7 +133,6 @@ export class MenuComponent {
     this.chatService.getCurriculum({ course_name, grade_level }).subscribe(
       (response) => {
         console.log('Curriculum data:', response);
-        // Aquí puedes manejar la respuesta del curriculum
       }
     );
   }
@@ -141,7 +142,6 @@ export class MenuComponent {
       component: EditCurriculumModalComponent,
       componentProps: { curriculumData: curriculumData }
     });
-
     await modal.present();
 
     const { data } = await modal.onDidDismiss();
@@ -159,4 +159,44 @@ export class MenuComponent {
     );
   }
 
+  // =========================================================
+  // NUEVOS MÉTODOS: Prueba de estado de estudiante
+  // =========================================================
+
+  async openStudentStatusTestModal() {
+    const modal = await this.modalController.create({
+      component: StudentStatusTestModalComponent,
+      componentProps: { mode: 'start' } // modo iniciar prueba
+    });
+    await modal.present();
+
+    const { data, role } = await modal.onDidDismiss();
+    if (role !== 'cancel' && data?.action === 'start') {
+      console.log('Prueba iniciada con:', data.payload);
+      // TODO: Integrar a tu backend/servicio:
+      // this.chatService.startStudentStatusTest(data.payload).subscribe(...)
+    }
+  }
+
+  async openStudentStatusCheckModal() {
+  const modal = await this.modalController.create({
+    component: StudentStatusCheckModalComponent,
+    cssClass: 'state-test-modal'
+  });
+  await modal.present();
+}
+
+  async openCreateStudentTestModal() {
+  const modal = await this.modalController.create({
+    component: CreateStudentTestModalComponent
+  });
+  await modal.present();
+
+  const { data, role } = await modal.onDidDismiss();
+  if (role !== 'cancel' && data?.action === 'create') {
+    console.log('Nueva prueba creada:', data.payload);
+    // TODO: persistir en backend
+    // this.chatService.createStudentTest(data.payload).subscribe(...)
+  }
+}
 }

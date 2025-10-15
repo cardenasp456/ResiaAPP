@@ -1,0 +1,119 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Crear prueba de estado</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">Cancelar</ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button [disabled]="isInvalid()" (click)="submit()" strong="true">
+        Guardar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form class="form-wrapper">
+    <ion-list lines="full">
+      <ion-item>
+        <ion-input
+          label="Título"
+          labelPlacement="stacked"
+          placeholder="Ej: Diagnóstico Matemáticas 7°"
+          [(ngModel)]="model.title"
+          name="title"
+          required
+          clear-input="true">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-select
+          label="Grado"
+          labelPlacement="stacked"
+          interface="popover"
+          [(ngModel)]="model.gradeLevel"
+          name="gradeLevel"
+          required>
+          <ion-select-option *ngFor="let g of grades" [value]="g">{{ g }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-select
+          label="Asignatura"
+          labelPlacement="stacked"
+          interface="popover"
+          [(ngModel)]="model.subject"
+          name="subject"
+          required>
+          <ion-select-option *ngFor="let s of subjects" [value]="s">{{ s }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <div class="questions-header">
+      <h2>Preguntas ({{ model.questions.length }}/{{ maxQuestions }})</h2>
+      <ion-button size="small" (click)="addQuestion()" [disabled]="!canAddQuestion()">
+        Añadir pregunta
+      </ion-button>
+    </div>
+
+    <ion-card *ngFor="let q of model.questions; let qi = index; trackBy: trackByIndex">
+      <ion-card-header class="card-header">
+        <ion-card-title>Pregunta {{ qi + 1 }}</ion-card-title>
+        <ion-button
+          fill="clear"
+          color="danger"
+          size="small"
+          (click)="removeQuestion(qi)"
+          [disabled]="model.questions.length === 1">
+          Eliminar
+        </ion-button>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item>
+          <ion-textarea
+            auto-grow="true"
+            label="Enunciado"
+            labelPlacement="stacked"
+            placeholder="Escribe el enunciado de la pregunta"
+            [(ngModel)]="q.statement"
+            name="statement-{{qi}}"
+            required>
+          </ion-textarea>
+        </ion-item>
+
+        <div class="options-title">Opciones (marca la correcta)</div>
+
+       <ion-radio-group
+        [(ngModel)]="q.correctIndex"
+        (ionChange)="q.correctIndex = +$event.detail.value" 
+        name="correct-{{qi}}"
+        >
+        <ion-item *ngFor="let opt of q.options; let i = index; trackBy: trackByOption">
+            <ion-input
+            class="option-input"
+            type="text"
+            [label]="'Opción ' + ('ABCD'[i])"
+            labelPlacement="stacked"
+            [placeholder]="'Texto de la opción ' + ('ABCD'[i])"
+            [(ngModel)]="opt.text"
+            name="opt-{{qi}}-{{i}}"
+            required>
+            </ion-input>
+            <ion-radio slot="end" [value]="i"></ion-radio>
+        </ion-item>
+        </ion-radio-group>
+
+
+
+      </ion-card-content>
+    </ion-card>
+
+    <div class="footer-space"></div>
+  </form>
+</ion-content>

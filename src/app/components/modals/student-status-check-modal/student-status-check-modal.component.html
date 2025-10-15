@@ -1,0 +1,73 @@
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Consultar estado</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="close()">Cerrar</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding" [fullscreen]="true">
+    <!-- Filtros -->
+    <div class="filters">
+      <ion-item>
+        <ion-label position="stacked">Identificación</ion-label>
+        <ion-input placeholder="Ej: 102938" [formControl]="form.controls.studentId"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Grado</ion-label>
+        <ion-select interface="popover" [formControl]="form.controls.gradeLevel" placeholder="Todos">
+          <ion-select-option value="">Todos</ion-select-option>
+          <ion-select-option *ngFor="let g of grades" [value]="g">{{ g }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <form [formGroup]="form">
+        <ion-item>
+            <ion-label position="stacked">Materia</ion-label>
+            <ion-select interface="popover" formControlName="subject" placeholder="Todas">
+            <ion-select-option value="">Todas</ion-select-option>
+            <ion-select-option *ngFor="let s of subjects" [value]="s">{{ s }}</ion-select-option>
+            </ion-select>
+        </ion-item>
+        </form>
+
+    </div>
+
+    <!-- Lista -->
+    <div *ngIf="loading" class="muted">Cargando…</div>
+    <div *ngIf="!loading && error" class="error">{{ error }}</div>
+    <div *ngIf="!loading && !error && items.length === 0" class="muted">Sin resultados.</div>
+
+    <ion-list *ngIf="!loading && !error && items.length">
+      <ion-item *ngFor="let it of items" (click)="openItem(it)" detail="true">
+        <ion-label>
+          <h2>{{ it.test.title }}</h2>
+          <p>
+            ID {{ it.studentId }} ·
+            Grado {{ it.test.gradeLevel }} ·
+            {{ it.test.subject }} ·
+            {{ it.createdAt | date:'short' }}
+          </p>
+          <p>Score: {{ it.analytics?.overallScore ?? it.score ?? '—' }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <!-- Paginación simple -->
+    <div class="pager" *ngIf="total > pageSize">
+    <ion-button fill="outline" (click)="prevPage()" [disabled]="page===1">Anterior</ion-button>
+    <span>Página {{ page }} de {{ totalPages }}</span>
+    <ion-button fill="outline" (click)="nextPage()" [disabled]="page >= totalPages">Siguiente</ion-button>
+    </div>
+
+  </ion-content>
+
+  <ion-footer>
+    <ion-toolbar>
+      <ion-buttons slot="end">
+        <ion-button (click)="close()">Cerrar</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>

@@ -1,0 +1,70 @@
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Desempeño del estudiante</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="close()">Cerrar</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding" [fullscreen]="true">
+  <div *ngIf="!radar" class="empty">No hay datos de radar para mostrar.</div>
+
+  <div *ngIf="radar" class="wrap">
+    <!-- Encabezado -->
+    <section class="header">
+      <div class="kpi">
+        <div class="kpi-title">Score global</div>
+        <div class="kpi-value">{{ radar?.overall?.score ?? '-' }}</div>
+      </div>
+      <div class="meta">
+        <div>Fuente: {{ radar?.source || '—' }}</div>
+        <div>Método: {{ radar?.method || '—' }}</div>
+        <div>Fecha: {{ radar?.createdAt | date:'short' }}</div>
+      </div>
+    </section>
+
+    <!-- Gráfico -->
+    <section class="chart-card">
+      <p-chart
+        #radarChart
+        type="radar"
+        [data]="chartData"
+        [options]="chartOptions"
+        style="display:block; width: 100%; height: 440px;"
+      ></p-chart>
+    </section>
+
+    <!-- Habilidades -->
+    <section class="skills">
+      <ion-accordion-group>
+        <ion-accordion *ngFor="let s of radar?.skills; let i = index" value="acc-{{i}}">
+          <ion-item slot="header">
+            <ion-label>
+              <strong>{{ s.name }}</strong>
+              <ion-note color="primary" style="margin-left:.5rem">
+                {{ s.score }}/{{ radar?.scale?.max ?? 100 }}
+              </ion-note>
+            </ion-label>
+          </ion-item>
+          <div class="acc-content" slot="content">
+            <p class="rationale" *ngIf="s.rationale; else noRat">{{ s.rationale }}</p>
+            <ng-template #noRat><em>Sin justificación.</em></ng-template>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </section>
+  </div>
+</ion-content>
+
+  <ion-footer>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="downloadPng()" [disabled]="!radar">Descargar PNG</ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button (click)="close()">Cerrar</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>

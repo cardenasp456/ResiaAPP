@@ -1,0 +1,30 @@
+/* Reserva espacio para el footer fijo */
+ion-content {
+  /* ~64px toolbar + safe area en móviles con notch */
+  --padding-bottom: calc(72px + env(safe-area-inset-bottom));
+}
+
+/* Evita márgenes que empujen el contenido más allá del viewport */
+p-card, ion-card {
+  margin: 0;
+}
+
+/* Header de la sección “runner” pegajoso para mejor UX (opcional) */
+.runner-header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 8px 0;
+  background: var(--ion-background-color);
+}
+
+/* Lista de opciones sin overflow lateral */
+ion-item {
+  --padding-start: 12px;
+  --inner-padding-end: 8px;
+}
+
+/* Botonera interna si decides no usar footer (opcional de respaldo) */
+.nav-buttons {
+  display: none; /* ya no se usa si pasamos a <ion-footer> */
+}

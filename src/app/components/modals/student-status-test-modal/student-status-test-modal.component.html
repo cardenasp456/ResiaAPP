@@ -1,0 +1,141 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ isStart ? 'Iniciar prueba de estado' : 'Consultar estado de estudiante' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" [fullscreen]="true">
+  <p-card>
+    <ng-template pTemplate="header">
+      {{ isStart ? 'Prueba de estado de estudiante' : 'Consulta de estado' }}
+    </ng-template>
+
+    <!-- ======= FORM DE FILTROS (si NO hay prueba activa) ======= -->
+    <ng-container *ngIf="!activeTest; else testRunner">
+      <form [formGroup]="form">
+        <ion-list lines="full">
+          <!-- 1) ID Estudiante (siempre visible) -->
+          <ion-item>
+            <ion-label position="stacked">ID Estudiante</ion-label>
+            <ion-input formControlName="studentId" placeholder="Ej: 102938" type="text"></ion-input>
+          </ion-item>
+
+          <!-- 2) Grado (ocultado si NO es start) -->
+          <ion-item [hidden]="!isStart">
+            <ion-label position="stacked">Grado</ion-label>
+            <ion-select formControlName="gradeLevel" interface="popover" placeholder="Selecciona un grado">
+              <ion-select-option *ngFor="let g of grades" [value]="g">{{ g }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <!-- 3) Materia (ocultado si NO es start) -->
+          <ion-item [hidden]="!isStart">
+            <ion-label position="stacked">Materia</ion-label>
+            <ion-select formControlName="subject" interface="popover" placeholder="Selecciona una materia">
+              <ion-select-option *ngFor="let s of subjects" [value]="s">{{ s }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </form>
+
+      <div class="mt-3">
+        <h3 class="mb-2">Pruebas disponibles</h3>
+
+        <div *ngIf="loading" class="muted">Cargando…</div>
+        <div *ngIf="!loading && error" class="error">{{ error }}</div>
+        <div *ngIf="!loading && !error && tests.length === 0" class="muted">
+          No hay pruebas para el grado y la materia seleccionados.
+        </div>
+
+        <ion-list *ngIf="!loading && !error && tests.length > 0">
+          <ion-item *ngFor="let t of tests" detail="true" (click)="pickTest(t)">
+            <ion-label>
+              <h2>{{ t.title }}</h2>
+              <p>Grado {{ t.gradeLevel }} · {{ t.subject }} · {{ t.questions?.length || 0 }} preguntas</p>
+              <p>{{ t.createdAt | date: 'short' }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ng-container>
+
+    <!-- ======= RUNNER DE PRUEBA (si hay prueba activa) ======= -->
+    <ng-template #testRunner>
+      <div class="runner-header">
+        <div>
+          <h2 class="m-0">{{ activeTest?.title }}</h2>
+          <small>Grado {{ activeTest?.gradeLevel }} · {{ activeTest?.subject }}</small>
+        </div>
+        <div>
+          <ion-button size="small" fill="outline" color="medium" (click)="cancelTest()">Volver a la lista</ion-button>
+        </div>
+      </div>
+
+      <div class="progress-wrap" *ngIf="activeTest">
+        <div>Pregunta {{ current + 1 }} / {{ total }}</div>
+        <ion-progress-bar [value]="(current + 1) / total"></ion-progress-bar>
+      </div>
+
+      <p-card>
+        <ng-template pTemplate="header">
+            Pregunta {{ current + 1 }}
+        </ng-template>
+
+        <p class="statement">{{ currentQuestion?.statement }}</p>
+
+        <ion-radio-group [(ngModel)]="answers[current]" name="answer-{{current}}">
+            <ion-item *ngFor="let opt of currentQuestion?.options; trackBy: trackByOption">
+            <ion-label>{{ opt.position | letterA }}. {{ opt.text }}</ion-label>
+            <ion-radio slot="end" [value]="opt.position"></ion-radio>
+            </ion-item>
+        </ion-radio-group>
+        </p-card>
+
+
+      <!-- tu contenido -->
+
+  <!-- Barra fija LISTA -->
+  <div *ngIf="!activeTest" slot="fixed" class="bottom-toolbar">
+    <ion-toolbar>
+      <ion-buttons slot="end">
+        <ion-button
+          [disabled]="form.invalid && isStart"
+          (click)="submit()">
+          {{ isStart ? 'Iniciar prueba' : 'Consultar estado' }}
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </div>
+
+  <!-- Barra fija PRUEBA -->
+  <div *ngIf="activeTest" slot="fixed" class="bottom-toolbar">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="prev()" [disabled]="current === 0">Anterior</ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button (click)="next()" [disabled]="current === total - 1">Siguiente</ion-button>
+        <ion-button color="success" (click)="finish()" [disabled]="!canFinish()">Enviar</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </div>
+    </ng-template>
+
+    <div *ngIf="!isStart && statusData" class="mt-3">
+      <pre class="status-pre">{{ statusData }}</pre>
+    </div>
+  </p-card>
+</ion-content>
+
+<ion-footer class="ion-padding" *ngIf="!activeTest">
+  <button
+    pButton
+    type="button"
+    [label]="isStart ? 'Iniciar prueba' : 'Consultar estado'"
+    (click)="submit()"
+    [disabled]="form.invalid && isStart">
+  </button>
+</ion-footer>
