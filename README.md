@@ -255,9 +255,4 @@ server {
 - **Issues:** usar GitHub Issues con plantillas (bug/feature).  
 - **Versionado:** **SemVer** + `CHANGELOG.md`.
 
----
-
-## 📝 Licencia
-
-[MIT] u otra según el proyecto.
 
